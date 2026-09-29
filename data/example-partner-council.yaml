@@ -26,3 +26,14 @@ datasets:
     group: "Flood Risk Theme"
     geometry_type: Polygon
     tags: ["theme", "example"]
+
+  - id: example-theme-layer-version2
+    title: "Cross-cutting theme layer"
+    summary: "A dataset that belongs to a theme rather than the file's own organisation."
+    description: |
+      Setting `group` directly on a dataset overrides the file-level group —
+      useful when one partner's file includes a layer that should be
+      catalogued under a shared theme instead.
+    group: "Flood Risk Theme"
+    geometry_type: Polygon
+    tags: ["theme", "example"]
