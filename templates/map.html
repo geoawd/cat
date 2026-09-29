@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+{% block title %}Map &mdash; {{ site.title }}{% endblock %}
+
+{% block head %}
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ol@{{ libraries.openlayers }}/ol.css">
+<script src="https://cdn.jsdelivr.net/npm/proj4@{{ libraries.proj4 }}/dist/proj4.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/ol@{{ libraries.openlayers }}/dist/ol.js"></script>
+{% endblock %}
+
+{% block content %}
+
+{% set mappable = datasets|selectattr('service_url')|list %}
+
+<section class="map-toolbar">
+  <label for="dataset-select">Layer</label>
+  <select id="dataset-select">
+    {% for ds in mappable %}
+    <option value="{{ ds.id }}">{{ ds.title }}</option>
+    {% endfor %}
+  </select>
+</section>
+
+<div id="map" class="map-canvas"></div>
+
+<!-- Data handed to map.js: project CRS definition and the dataset catalog.
+     Kept as static JSON so the page has no server-side dependency.
+     Only datasets with a service_url are included -- metadata-only entries
+     have nothing for the map to query. -->
+<script type="application/json" id="portal-config">
+{
+  "baseUrl": "{{ base_url }}",
+  "project": {
+    "epsg": "{{ project.epsg }}",
+    "proj4def": "{{ project.proj4def }}",
+    "extent": {{ project.extent }},
+    "center": {{ project.center }},
+    "zoom": {{ project.zoom }}
+  },
+  "datasets": [
+    {% for ds in mappable %}
+    {
+      "id": "{{ ds.id }}",
+      "title": "{{ ds.title }}",
+      "geometryType": "{{ ds.geometry_type }}",
+      "serviceUrl": "{{ ds.service_url }}"
+    }{% if not loop.last %},{% endif %}
+    {% endfor %}
+  ]
+}
+</script>
+
+<script src="{{ base_url }}static/js/map.js"></script>
+
+{% endblock %}

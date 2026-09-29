@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+{% block title %}{{ ds.title }} &mdash; {{ site.title }}{% endblock %}
+{% block content %}
+
+<a class="back-link" href="{{ base_url }}index.html">&larr; All datasets</a>
+
+<article class="dataset-detail">
+  <h1>{{ ds.title }}</h1>
+  <p class="dataset-meta">{{ ds.geometry_type }}
+    {% for tag in ds.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+  </p>
+  <p class="dataset-group-label">{{ ds.group }}</p>
+
+  <div class="dataset-description">{{ ds.description_html | safe }}</div>
+
+  <dl class="dataset-facts">
+    {% if ds.service_url %}
+    <dt>Source service</dt>
+    <dd><code>{{ ds.service_url }}</code></dd>
+    {% endif %}
+
+    {% if ds.author %}
+    <dt>Author</dt>
+    <dd>{{ ds.author }}</dd>
+    {% endif %}
+
+    {% if ds.contact %}
+    <dt>Contact</dt>
+    <dd><a href="mailto:{{ ds.contact }}">{{ ds.contact }}</a></dd>
+    {% endif %}
+
+    {% if ds.license %}
+    <dt>License</dt>
+    <dd>{{ ds.license }}</dd>
+    {% endif %}
+
+    {% if ds.date_published %}
+    <dt>Published</dt>
+    <dd>{{ ds.date_published }}</dd>
+    {% endif %}
+
+    {% if ds.doi %}
+    <dt>DOI</dt>
+    <dd><a href="https://doi.org/{{ ds.doi }}">{{ ds.doi }}</a></dd>
+    {% endif %}
+  </dl>
+
+  {% if ds.citation %}
+  <div class="citation-block">
+    <h2>Citation</h2>
+    <p class="citation-text">{{ ds.citation }}</p>
+  </div>
+  {% endif %}
+
+  {% if ds.external_links %}
+  <div class="external-links">
+    <h2>Related links</h2>
+    <ul>
+      {% for link in ds.external_links %}
+      <li><a href="{{ link.url }}">{{ link.label }}</a></li>
+      {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  {% if ds.service_url %}
+  <a class="button" href="{{ base_url }}map.html?dataset={{ ds.id }}">View on map</a>
+  {% endif %}
+  <a class="json-link" href="{{ base_url }}catalogue/{{ ds.id }}/metadata.json">View metadata as JSON</a>
+</article>
+
+{% endblock %}

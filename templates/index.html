@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}{{ site.title }}{% endblock %}
+{% block content %}
+
+<section class="intro">
+  <h1>Catalog</h1>
+  <p>Layers below are queried live from their source services. See the map page to view them together.
+    Full catalog also available as <a href="{{ base_url }}catalog.json">JSON</a>.</p>
+</section>
+
+{% for group_name, group_datasets in datasets|groupby('group') %}
+<section class="dataset-group">
+  <h2 class="group-heading">{{ group_name }}</h2>
+  <ul class="dataset-list">
+    {% for ds in group_datasets %}
+    <li class="dataset-card">
+      <h3><a href="{{ base_url }}catalogue/{{ ds.id }}/">{{ ds.title }}</a></h3>
+      <p>{{ ds.summary }}</p>
+      <p class="dataset-meta">{{ ds.geometry_type }}
+        {% for tag in ds.tags %}<span class="tag">{{ tag }}</span>{% endfor %}
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+</section>
+{% endfor %}
+
+{% endblock %}

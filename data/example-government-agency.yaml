@@ -1,0 +1,58 @@
+# One file per partner organisation or theme. The "group" value is how this
+# file's datasets are labelled/sectioned on the catalog page — set it to
+# whatever grouping makes sense (an org name, a theme, a project name).
+#
+# service_url is optional: omit it for a metadata-only entry (e.g. a dataset
+# you only have an external viewer/download link for). Such entries get a
+# catalog + detail page but are left out of the map's layer dropdown, since
+# there's no REST endpoint for OpenLayers to query.
+
+group: "Example Agency"
+
+datasets:
+  - id: example-points
+    title: "Example point layer"
+    summary: "Placeholder point dataset served from a ArcGIS REST FeatureServer."
+    description: |
+      Replace `service_url` with a real FeatureServer/MapServer layer endpoint. The map
+      page queries it directly with an outSR matching the project CRS, so no local
+      copy of the data is needed.
+
+      **Update frequency:** monthly, aligned with the source system's refresh cycle.
+
+      Known limitations:
+
+      - Attribute names are inherited as-is from the source service
+      - No historical/versioned snapshots are kept by this portal
+    geometry_type: Point
+    tags: ["example", "points"]
+
+    author: "Example Agency"
+    contact: "data@example.com"
+    license: "Open Licence v3.0"
+    date_published: "2024-01-15"
+    doi: "10.5281/zenodo.0000000"
+    citation: >
+      Example Agency (2024). Example point layer [Dataset].
+      https://doi.org/10.5281/zenodo.0000000
+    external_links:
+      - label: "Metadata record"
+        url: "https://data.example.com/metadata/example-points"
+      - label: "Map viewer"
+        url: "https://maps.example.com/viewer?layer=example-points"
+      - label: "Open data download"
+        url: "https://data.example.com/dataset/example-points"
+
+  - id: example-metadata-only
+    title: "Archived survey (metadata only)"
+    summary: "A dataset with no live REST endpoint — record kept for reference."
+    description: |
+      Demonstrates a catalog entry with no `service_url`: it gets a catalog
+      card and a detail page, but is left out of the map page's layer
+      dropdown since there's nothing for OpenLayers to query directly.
+    geometry_type: Polygon
+    tags: ["archived"]
+    author: "Example Agency"
+    external_links:
+      - label: "Original survey PDF"
+        url: "https://data.example.com/archive/example-survey.pdf"

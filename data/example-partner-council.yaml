@@ -1,0 +1,28 @@
+group: "Example Partner "
+
+datasets:
+  - id: example-boundaries
+    title: "Example boundary layer"
+    summary: "Placeholder polygon dataset, e.g. administrative boundaries."
+    description: |
+      A second example showing the catalog and map both scale to more than one
+      dataset without extra template work.
+    geometry_type: Polygon
+    tags: ["example", "boundaries"]
+
+    author: "Example Partner "
+    contact: "gis@example.com"
+    license: "Open Government Licence v3.0"
+    # doi, citation and external_links are all optional — this entry
+    # deliberately omits them to show the template handles gaps cleanly.
+
+  - id: example-theme-layer
+    title: "Cross-cutting theme layer"
+    summary: "A dataset that belongs to a theme rather than the file's own organisation."
+    description: |
+      Setting `group` directly on a dataset overrides the file-level group —
+      useful when one partner's file includes a layer that should be
+      catalogued under a shared theme instead.
+    group: "Flood Risk Theme"
+    geometry_type: Polygon
+    tags: ["theme", "example"]

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{% block title %}{{ site.title }}{% endblock %}</title>
+<link rel="stylesheet" href="{{ base_url }}static/css/style.css">
+{% block head %}{% endblock %}
+</head>
+<body>
+
+<header class="site-header">
+  <a class="site-title" href="{{ base_url }}index.html">{{ site.title }}</a>
+  <nav>
+    {% for item in site.nav %}
+    <a href="{{ base_url }}{{ item.href }}">{{ item.label }}</a>
+    {% endfor %}
+  </nav>
+</header>
+
+<main class="site-main">
+{% block content %}{% endblock %}
+</main>
+
+<footer class="site-footer">
+  <span>{{ site.title }} &mdash; built with Jinja2, deployed on GitHub Pages.</span>
+</footer>
+
+</body>
+</html>
