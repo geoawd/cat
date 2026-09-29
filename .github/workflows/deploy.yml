@@ -1,8 +1,8 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
+#push:
+#branches: [main]
   workflow_dispatch:     # lets you trigger a rebuild manually from the Actions tab
 
 # Grants the workflow needs to publish to Pages via the deploy-pages action
