@@ -1,6 +1,6 @@
 site:
   title: "Portal"
-  base_url: "/"          # set to "/repo-name/" if not using a custom domain on GitHub Pages
+  base_url: "/cat/"          # set to "/repo-name/" if not using a custom domain on GitHub Pages
   # Full domain (no trailing slash), e.g. "https://data.example.gov" -- used
   # to build fully-qualified @id URLs in catalog.json / metadata.json.
   # Leave blank to fall back to base_url-relative paths.
